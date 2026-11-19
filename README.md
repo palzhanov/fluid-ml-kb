@@ -16,4 +16,4 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Or open a notebook directly in Colab from its GitHub page. Notebooks are committed with their outputs so they can be read without running them.
+Notebooks are committed with their outputs so they can be read without running them. Interactive outputs such as animation players need JavaScript, which GitHub's preview does not run: open the notebook in [nbviewer](https://nbviewer.org/github/palzhanov/fluid-ml-kb/tree/main/notebooks/), Colab or Jupyter to use them.
