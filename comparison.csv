@@ -1,0 +1,31 @@
+method,note,family,object_learned,intrusive,discretization,geometry_varies,time_treatment,inputs,latent_structure,physics_in_loop,uncertainty,error_certification,data_regime,query_anywhere,confidence
+Certified RB / POD-Galerkin,rb-projection-roms,projection ROM,projected dynamics,yes,fixed mesh,parametrized map only,time-stepping (projected),scalar mu,linear (POD),governing eqs projected,no,yes (a posteriori bounds),small (10-100s solves),no,first-pass
+Operator inference,rb-projection-roms,projection ROM,projected dynamics,no,fixed mesh,no,time-stepping (learned polynomial ROM),scalar mu + inputs,linear (POD),assumed polynomial structure,no,no,small,no,first-pass
+POD-NN,pod-nn,projection ROM,param-to-solution,no,fixed mesh,no,t as input,scalar mu,linear (POD),no,no,no,small,no,first-pass
+CAE-ROM,dl-roms,DL-ROM,projected dynamics,yes,fixed grid,no,time-stepping (manifold LSPG),scalar mu,nonlinear AE,residual projection,no,no,small-medium,no,first-pass
+DL-ROM,dl-roms,DL-ROM,param-to-solution,no,fixed mesh,no,t as input,scalar mu,nonlinear AE,no,no,no,small-medium,no,first-pass
+POD-DL-ROM,dl-roms,DL-ROM,param-to-solution,no,fixed mesh,no,t as input,scalar mu,POD + nonlinear AE,no,no,no,small-medium,no,first-pass
+GCA-ROM,gca-rom,DL-ROM / graph,param-to-solution,no,unstructured fixed mesh,unclear,t as input or steady,scalar mu,nonlinear graph AE,no,no,no,small-medium,no,first-pass
+LDNet,ldnet,latent dynamics,latent ODE + neural field,no,mesh-free output,no,continuous-time latent ODE,time-varying inputs u(t) + mu,nonlinear dynamical (no encoder),no,no,no,small,yes,first-pass
+Koopman AE,latent-dynamics-encoders,latent dynamics,latent linear dynamics,no,fixed grid,no,discrete latent stepping,initial state,linear-in-latent,no,no,no,medium,no,first-pass
+LaSDI (AE + SINDy),latent-dynamics-encoders,latent dynamics,latent sparse ODE,no,fixed grid,no,latent ODE,scalar mu (interp. coeffs),nonlinear AE + sparse ODE,no,no,no,small-medium,no,first-pass
+LED,latent-dynamics-encoders,latent dynamics,latent RNN + solver coupling,partial (uses solver),fixed grid,no,latent RNN with solver bursts,initial state,nonlinear AE,full solver in loop,no,no,medium,no,first-pass
+DINo,neural-fields,neural field,latent ODE + INR,no,mesh-free,no,continuous-time latent ODE,initial state,auto-decoded codes,no,no,no,medium,yes,first-pass
+CORAL,neural-fields,neural field,code-to-code operator,no,mesh-free,yes,steady or latent stepping,input field / geometry,INR codes,no,no,no,medium,yes,first-pass
+DeepONet,deeponet,operator learning,operator,no,fixed sensors in / any query out,no,t as trunk input,input function a(x),linear in trunk basis,optional (PI-DeepONet),no,no,medium-large,yes,first-pass
+FNO,fno,operator learning,operator,no,uniform grid,no,autoregressive or 3D space-time,input function a(x),none (spectral truncation),optional (PINO),no,no,large,no,first-pass
+CNO,cno,operator learning,operator,no,uniform grid,no,autoregressive or lead time,input function a(x),U-Net multiscale,no,no,no,large,no,first-pass
+Geo-FNO,geometry-operators,operator learning,operator,no,deformed to latent grid,yes,mostly steady,geometry + input,none,no,no,no,large,partially,first-pass
+GINO,geometry-operators,operator learning,operator,no,point cloud -> latent grid,yes,steady,geometry (SDF) + input,latent grid,no,no,no,large,yes,first-pass
+Galerkin Transformer,transformer-operators,transformer operator,operator,no,uniform grid / points,no,steady or autoregressive,input function,none,no,no,no,large,no,first-pass
+GNOT,transformer-operators,transformer operator,operator,no,point cloud,yes,steady,multiple input functions + geometry,none,no,no,no,large,yes,first-pass
+Transolver,transformer-operators,transformer operator,operator,no,point cloud / unstructured,yes,steady or autoregressive,geometry + input,learned slices (low-rank tokens),no,no,no,large,yes,first-pass
+MeshGraphNets,graph-mesh-models,graph/mesh,time-stepper,no,unstructured mesh (adaptive),yes,autoregressive,initial state + BCs,none,no,no,no,large,no,first-pass
+MP-PDE,graph-mesh-models,graph/mesh,time-stepper,no,grid or mesh,partial,autoregressive (temporal bundling),initial state + PDE params,none,no,no,no,large,no,first-pass
+PINN,pinns,physics-informed,single solution field,needs PDE (not solver),mesh-free collocation,per-instance,t as input,none (one instance),none,residual loss,no,no,none or sparse data,yes,first-pass
+PI-DeepONet,pinns,physics-informed,operator,needs PDE (not solver),collocation,no,t as trunk input,input function,linear in trunk basis,residual loss,no,no,little data,yes,first-pass
+LC-CFD (Kochkov),hybrid-solvers,hybrid solver,learned correction in solver,yes (differentiable solver),uniform grid,no,solver time-stepping,forcing / initial state,none,full solver,no,no,large,no,first-pass
+PDE-Refiner,generative-surrogates,generative,time-stepper (refined),no,uniform grid,no,autoregressive,initial state,none,no,partial (refinement noise),no,large,no,first-pass
+ACDM,generative-surrogates,generative,conditional distribution of next state,no,uniform grid,no,autoregressive,initial state + params,none,no,yes (samples),no,large,no,first-pass
+GenCast,generative-surrogates,generative,conditional distribution of next state,no,sphere mesh,no,autoregressive,initial state,none,no,yes (ensembles),no,very large,no,first-pass
+Poseidon,foundation-models,foundation model,operator (lead-time conditioned),no,uniform grid,no,lead time input,initial state,hierarchical tokens,no,no,no,very large pretrain + few-shot,no,first-pass
