@@ -1,3 +1,19 @@
 # fluid-ml-kb
 
-Knowledge base on machine learning for fluid dynamics and parametrized-PDE surrogates. Content arrives via pull requests.
+Companion notebooks for the notes [Machine learning for fluid dynamics](https://palzhanov.com/ml-fluids/).
+
+Each method section of the notes gets a small, self-contained Jupyter notebook that demonstrates the idea on a fluid-flavoured toy problem.
+
+| Notebook | Notes section | Topic |
+|---|---|---|
+| [`notebooks/01-pod-burgers.ipynb`](notebooks/01-pod-burgers.ipynb) | 2.1 | POD and POD-Galerkin ROM for 1D viscous Burgers |
+
+## Running
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+jupyter lab
+```
+
+Or open a notebook directly in Colab from its GitHub page. Notebooks are committed with their outputs so they can be read without running them.
